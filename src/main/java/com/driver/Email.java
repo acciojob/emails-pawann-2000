@@ -38,7 +38,7 @@ public class Email {
 
         char[] nP = newPassword.toCharArray();
         for (char ch : nP) {
-            if(ch>='A' && ch <='B'){
+            if(ch>='A' && ch <='Z'){
                 uc=!(uc);
             } else if(ch>='a' && ch<='z'){
                 lc=!(lc);
