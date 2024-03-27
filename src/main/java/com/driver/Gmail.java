@@ -21,22 +21,23 @@ public class Gmail extends Email {
         // It is guaranteed that:
         // 1. Each mail in the inbox is distinct.
         // 2. The mails are received in non-decreasing order. This means that the date of a new mail is greater than equal to the dates of mails received already.
-        if(inbox.size() >= inboxCapacity){
-            moveOldestToTrash();
+        if(inbox.size() >= getInboxCapacity()){
+            trash.add(inbox.get(0));
+            inbox.remove(0);
         }
         inbox.add(new Mail(date, sender, message));
     }
 
-    private void moveOldestToTrash(){
-        Mail oldest = inbox.get(0);
-        for(Mail mail : inbox){
-            if(mail.date.before(oldest.date)) {
-                oldest = mail;
-            }
-        }
-        inbox.remove(oldest);
-        trash.add(oldest);
-    }
+//    private void moveOldestToTrash(){
+//        Mail oldest = inbox.get(0);
+//        for(Mail mail : inbox){
+//            if(mail.date.before(oldest.date)) {
+//                oldest = mail;
+//            }
+//        }
+//        inbox.remove(oldest);
+//        trash.add(oldest);
+//    }
 
     public void deleteMail(String message){
         // Each message is distinct

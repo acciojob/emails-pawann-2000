@@ -22,9 +22,7 @@ public class Email {
 
     public void changePassword(String oldPassword, String newPassword){
         if(oldPassword.equals(password)){
-            boolean validPass = validatePass(newPassword);
-
-            if(validPass) {
+            if(validatePass(newPassword)) {
                 this.password = newPassword;
             }
         }
@@ -36,24 +34,22 @@ public class Email {
         // 3. It contains at least one lowercase letter
         // 4. It contains at least one digit
         // 5. It contains at least one special character
-        int uc=0, lc=0, di=0, sp=0;
+        boolean uc=false, lc=false, di=false, sp=false;
 
         char[] nP = newPassword.toCharArray();
         for (char ch : nP) {
             if(ch>='A' && ch <='B'){
-                uc++;
+                uc=!(uc);
             } else if(ch>='a' && ch<='z'){
-                lc++;
+                lc=!(lc);
             } else if(ch>='0' && ch<='9'){
-                di++;
+                di=!(di);
+            } else {
+                sp=!(sp);
             }
         }
 
-        if((boolean)Pattern.compile("[\\W\\S_]").matcher(newPassword).find()){
-            sp++;
-        }
-
-        return uc>0 && lc>0 && di>0 && sp>0 && newPassword.length()>=8;
+        return uc && lc && di && sp && newPassword.length()>=8;
     }
 
 }
